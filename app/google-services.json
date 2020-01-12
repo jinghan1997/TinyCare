@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "37123279706",
+    "firebase_url": "https://tinycare-b19ba.firebaseio.com",
+    "project_id": "tinycare-b19ba",
+    "storage_bucket": "tinycare-b19ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37123279706:android:9f52e5f4319d522c130163",
+        "android_client_info": {
+          "package_name": "com.example.tinycare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37123279706-2vla0momggl903073mbcecaf05052sh5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy9EkAjiY3zYDLyG6HrlCaaIy_1pJkLME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37123279706-2vla0momggl903073mbcecaf05052sh5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TinyCare</string>
+    <string name="enter_id">
+        Please enter the identification number of the hardware purchased.
+        \nThis ID number should be sent to your email immediately after your purchase.
+    </string>
+</resources>
