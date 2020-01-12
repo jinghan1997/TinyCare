@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     String path;
     Bitmap bitmap;
 
+    // Seems like the reason why it wasn't calling the listeners was because Java's garbage collection threw away the references, and hence the event listeners
+    // Making the variables "global" seems to work
+    FirebaseDatabase database;
+    DatabaseReference rootRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         String petRemoved = dataSource.getName(position);
                         dataSource.removeData(position);
                         Toast.makeText(MainActivity.this,
-                                petRemoved + " removed!", Toast.LENGTH_LONG).show();
+                                petRemoved + " removed!", Toast.LENGTH_SHORT).show();
                         petAdapter.notifyDataSetChanged();
                     }
                 };
@@ -113,43 +118,59 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if( requestCode == REQUEST_NEW_PET && resultCode == Activity.RESULT_OK){
             id = data.getStringExtra(DataEntry.KEY_ID);
             // Retrieve type from Firebase
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference rootRef = database.getReference();
-            Log.e("FIREBASE", "this line ran");
-            ValueEventListener vel = rootRef.addValueEventListener(new ValueEventListener() {
+            database = FirebaseDatabase.getInstance();
+            rootRef = database.getReference();
+            Log.i("jeremy", "this line ran");
+            rootRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Log.e("FIREBASE", "type extracted?");
+                    Log.i("jeremy", "type extracted?");
+                    Log.i("jeremy", dataSnapshot.toString());
                     type = dataSnapshot.child(id).child("type").getValue(String.class);
+                    if (type != null) { // Add this check to ensure that this won't throw a NullPointerException
+                        if (type.equals("fish")) {
+                            name = "fish";
+                            bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_clown_fish_svgrepo_com));
+                            path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+                        } else if (type.equals("plant")) {
+                            name = "plant";
+                            bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_plant_svgrepo_com));
+                            path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+                        } else {
+                            name = "hamster";
+                            bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_svgrepo_com));
+                            path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+                        }
+                        dataSource.addData(name, path, type, id);
+                        petAdapter.notifyDataSetChanged();
+                    }
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.e("FIREBASE", "DIED");
-                    Log.e("ERROR", databaseError.getMessage());
+                    Log.e("jeremy", "activity DIED");
+                    Log.e("jeremy", databaseError.getMessage());
                 }
             });
-            System.out.println(vel);
-            if (type.equals("fish")) {
-                name = "fish";
-                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_clown_fish_svgrepo_com));
-                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
-            } else if (type.equals("plant")) {
-                name = "plant";
-                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_plant_svgrepo_com));
-                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
-            } else {
-                name = "hamster";
-                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_svgrepo_com));
-                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
-            }
-            dataSource.addData(name, path, type, id);
-            petAdapter.notifyDataSetChanged();
+//            if (type.equals("fish")) {
+//                name = "fish";
+//                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_clown_fish_svgrepo_com));
+//                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+//            } else if (type.equals("plant")) {
+//                name = "plant";
+//                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_plant_svgrepo_com));
+//                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+//            } else {
+//                name = "hamster";
+//                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_svgrepo_com));
+//                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+//            }
+//            dataSource.addData(name, path, type, id);
+//            petAdapter.notifyDataSetChanged();
         }
     }
 
