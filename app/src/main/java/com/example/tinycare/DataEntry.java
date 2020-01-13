@@ -2,6 +2,7 @@ package com.example.tinycare;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +17,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 public class DataEntry extends AppCompatActivity {
+
+    final String KEY_DATA = "data";
+    final String PREF_FILE = "mainsharedpref";
+    SharedPreferences mPreferences;
+    DataSource dataSource;
 
     EditText editTextIdEntry;
     Button buttonOK;
@@ -34,6 +41,14 @@ public class DataEntry extends AppCompatActivity {
         editTextIdEntry = findViewById(R.id.editTextIdEntry);
         buttonOK = findViewById(R.id.buttonOK);
 
+        // Load the Json string from shared Preferences
+        mPreferences = getSharedPreferences(PREF_FILE, MODE_PRIVATE);
+        String json = mPreferences.getString(KEY_DATA, "");
+        if( !json.isEmpty() ){
+            Gson gson = new Gson();
+            dataSource = gson.fromJson(json, DataSource.class);
+        }
+
         // Set up OK button to return to MainActivy
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,14 +63,21 @@ public class DataEntry extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         if (snapshot.child(idEntered).exists()) {
-                            idExists = true;
-                            int resultCode = Activity.RESULT_OK;
-                            Intent resultIntent = new Intent();
-                            resultIntent.putExtra(KEY_ID, idEntered);
-                            setResult(resultCode, resultIntent);
-                            finish();
+                            // Check if ID is already added
+                            if (dataSource != null && dataSource.idAlreadyAdded(idEntered)) {
+                                Toast.makeText(DataEntry.this,
+                                        "ID is already added", Toast.LENGTH_LONG).show();
+                            } else {
+                                idExists = true;
+                                int resultCode = Activity.RESULT_OK;
+                                Intent resultIntent = new Intent();
+                                resultIntent.putExtra(KEY_ID, idEntered);
+                                setResult(resultCode, resultIntent);
+                                finish();
+                            }
                         } else {
-                            Toast.makeText(DataEntry.this, "ID does not exist", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DataEntry.this,
+                                    "ID does not exist", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override

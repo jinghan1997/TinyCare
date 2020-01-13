@@ -3,8 +3,8 @@ package com.example.tinycare;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
     final String PREF_FILE = "mainsharedpref";
     SharedPreferences mPreferences;
 
-    final static int REQUEST_NEW_PET = 2000;
     DataSource dataSource;
     RecyclerView recyclerView;
     PetAdapter petAdapter;
 
+    final static int REQUEST_NEW_PET = 2000;
     String id;
     String type;
     String name;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         petAdapter = new PetAdapter(this, dataSource);
         recyclerView.setAdapter(petAdapter);
         recyclerView.setLayoutManager(
-                new GridLayoutManager(this, 1));
+                new LinearLayoutManager(this));
 
         // Delete pet from RecyclerView upon swiping
         ItemTouchHelper.SimpleCallback simpleCallback = new
@@ -125,12 +125,9 @@ public class MainActivity extends AppCompatActivity {
             // Retrieve type from Firebase
             database = FirebaseDatabase.getInstance();
             rootRef = database.getReference();
-            Log.i("jeremy", "this line ran");
             rootRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Log.i("jeremy", "type extracted?");
-                    Log.i("jeremy", dataSnapshot.toString());
                     type = dataSnapshot.child(id).child("type").getValue(String.class);
                     if (type != null) { // Add this check to ensure that this won't throw a NullPointerException
                         if (type.equals("fish")) {
@@ -152,25 +149,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.e("jeremy", "activity DIED");
                     Log.e("jeremy", databaseError.getMessage());
                 }
             });
-//            if (type.equals("fish")) {
-//                name = "fish";
-//                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_clown_fish_svgrepo_com));
-//                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
-//            } else if (type.equals("plant")) {
-//                name = "plant";
-//                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_plant_svgrepo_com));
-//                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
-//            } else {
-//                name = "hamster";
-//                bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_svgrepo_com));
-//                path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
-//            }
-//            dataSource.addData(name, path, type, id);
-//            petAdapter.notifyDataSetChanged();
         }
     }
 

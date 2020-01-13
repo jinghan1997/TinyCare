@@ -7,18 +7,29 @@ import java.util.ArrayList;
 public class DataSource {
 
     private ArrayList<CardData> dataArrayList;
+    private ArrayList<String> idsAdded;
 
     DataSource() {
         dataArrayList = new ArrayList<>();
+        idsAdded = new ArrayList<>();
     }
 
     void addData(String name, String path, String type, String id){
         CardData c = new CardData(name, path, type, id);
         dataArrayList.add(c);
+        idsAdded.add(id);
     }
 
     void removeData(int position) {
         dataArrayList.remove(position);
+        idsAdded.remove(position);
+    }
+
+    boolean idAlreadyAdded(String id) {
+        if (idsAdded.contains(id)) {
+            return true;
+        }
+        return false;
     }
 
     String getName(int i) {
