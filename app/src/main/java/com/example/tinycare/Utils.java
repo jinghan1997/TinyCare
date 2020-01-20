@@ -7,7 +7,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Base64;
+import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,6 +20,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Utils {
+
+    static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        boolean haveNetwork = activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        Log.i("Utils", "Active Network: " + haveNetwork);
+        return haveNetwork;
+    }
+
     static String saveToInternalStorage(Bitmap bitmapImage, String name, Context context) {
         ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
@@ -49,6 +64,25 @@ public class Utils {
             e.printStackTrace();
         }
         return b;
+    }
+
+    // Method encode bitmap to base64
+    public static String encodeTobase64(Bitmap image) {
+        Bitmap immage = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        Log.d("Image Log:", imageEncoded);
+        return imageEncoded;
+    }
+
+    // Method to decode base64 to bitmap
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory
+                .decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
     public static Bitmap drawableToBitmap (Drawable drawable) {

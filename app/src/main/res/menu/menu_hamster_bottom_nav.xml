@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/hamster_feed"
+        android:icon="@drawable/ic_hamster_facing_right_svgrepo_com"
+        android:title="Feed" />
+
+    <item
+        android:id="@+id/hamster_photo"
+        android:icon="@drawable/ic_camera_alt_black_24dp"
+        android:title="Photo" />
+
+    <item
+        android:id="@+id/hamster_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Settings" />
+
+</menu>

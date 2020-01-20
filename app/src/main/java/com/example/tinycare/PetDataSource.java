@@ -4,12 +4,12 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
-public class DataSource {
+public class PetDataSource {
 
     private ArrayList<CardData> dataArrayList;
     private ArrayList<String> idsAdded;
 
-    DataSource() {
+    PetDataSource() {
         dataArrayList = new ArrayList<>();
         idsAdded = new ArrayList<>();
     }
@@ -36,8 +36,16 @@ public class DataSource {
         return dataArrayList.get(i).getName();
     }
 
+    void setName(int i, String name) {
+        dataArrayList.get(i).setName(name);
+    }
+
     String getPath(int i) {
         return dataArrayList.get(i).getPath();
+    }
+
+    void setPath(int i, String path) {
+        dataArrayList.get(i).setPath(path);
     }
 
     String getType(int i) {
@@ -49,9 +57,10 @@ public class DataSource {
     }
 
     Bitmap getImage(int i) {
-        String name = dataArrayList.get(i).getName();
+        //String name = dataArrayList.get(i).getName();
         String path = dataArrayList.get(i).getPath();
-        return Utils.loadImageFromStorage(path, name);
+        return Utils.decodeBase64(path);
+        //return Utils.loadImageFromStorage(path, name);
     }
 
     int getSize() {
@@ -75,8 +84,16 @@ public class DataSource {
             return name;
         }
 
+        private void setName(String name) {
+            this.name = name;
+        }
+
         private String getPath() {
             return path;
+        }
+
+        private void setPath(String path) {
+            this.path = path;
         }
 
         private String getType() {

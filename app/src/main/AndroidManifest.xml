@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DataEntry"
+        <activity android:name=".PetDataEntry"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".HamsterActivity"
             android:parentActivityName=".MainActivity">
         </activity>
     </application>

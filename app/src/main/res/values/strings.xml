@@ -4,4 +4,85 @@
         Please enter the identification number of the hardware purchased.
         \nThis ID number should be sent to your email immediately after your purchase.
     </string>
+
+    <string name="version">
+        HamsterCare v1.1
+        \nCredits to Professors Norman Lee and Cheung Ngai-Mann for their guidance and support
+    </string>
+
+    <string name="contactUs">
+        Email: kwali5ying@gmail.com
+        \nLocation: Singapore University of Technology and Design
+        \n          8 Somapah Rd, Singapore 487372
+    </string>
+
+    <string name="hamster_help_bottom_nav">
+        The bottom navigation bar allows movement between the primary functions in the app.
+        \n\nIt is split into 3 tabs - Feed, Photo and Settings (from left to right).
+    </string>
+
+    <string name="hamster_feed_tab">
+        The Feed tab allows automatic as well as manual topping-up of food and water.
+        \n\nThe right column displays information about the previous top-up of water, the amount of
+        water left, and allows the top-up of water through the \"Feed Me Water!\" button.
+    </string>
+
+    <string name="hamster_activate_auto_top_up">
+        Automatic top-up of food and water can be enabled or disabled by simply
+        toggling the switch-button on or off.
+        \n\nAutomatic top-up will occur when the food/water level is low.
+    </string>
+
+    <string name="hamster_food_card">
+        The food card displays information about the amount of food left and the previous top-up
+        of food.
+        \n\nThe \"TOP-UP FOOD!\" button at the top right corner also allows manual topping-up
+        of food. The top-up does not take place if the food amount is full.
+    </string>
+
+    <string name="hamster_water_card">
+        The water card displays information about the amount of water left and the previous top-up
+        of water.
+        \n\nThe \"TOP-UP WATER!\" button at the top right corner also allows manual topping-up
+        of water. The top-up does not take place if the food amount is full.
+    </string>
+
+    <string name="hamster_photo_tab">
+        The Photo tab allows you to take a picture of your hamster at any point of time to
+        see how it is doing.
+        \n\nSimply do so through the round button with a camera icon.
+        \n\nUnstable internet connection may cause the photo to take a longer time to load.
+        If you see the loading progress circle, please be patient.
+    </string>
+
+    <string name="hamster_settings_tab">
+        The Settings tab allows you to set your hamster\'s name and/or profile picture here.
+        \n\nClick the green round button with a tick to confirm changes for
+        both name and profile picture.
+    </string>
+
+    <string name="hamster_edit_name">
+        Key in the name that you wish to set your hamster\'s name to.
+        \n\nDon\'t forget to click on the green round button with a tick icon at the bottom
+        to save your changes!
+    </string>
+
+    <string name="hamster_profile_picture">
+        A preview of your hamster\'s profile picture is displayed here.
+        \n\nClick on the blue round button with an arrow icon to choose an image.
+        \n\nOnce you\'ve chosen an image, your hamster\'s tentative profile picture will be
+        displayed here.
+        \n\nDon\'t forget to click on the green round button with a tick icon at the bottom
+        to save your changes!
+    </string>
+
+    <string name="hamster_popup_options">
+        You can choose 4 ways to upload an image:
+        \n\t1. Use our default hamster profile picture
+        \n\t2. Upload an image from your phone gallery
+        \n\t3. Take a photo with your phone camera
+        \n\t4. Use the latest HamsterCare photo taken in the
+        \n\t\t\tPhoto Tab
+    </string>
+
 </resources>

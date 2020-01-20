@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     final String PREF_FILE = "mainsharedpref";
     SharedPreferences mPreferences;
 
-    DataSource dataSource;
+    PetDataSource petDataSource;
     RecyclerView recyclerView;
     PetAdapter petAdapter;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DataEntry.class);
+                Intent intent = new Intent(MainActivity.this, PetDataEntry.class);
                 startActivityForResult(intent, REQUEST_NEW_PET);
             }
         });
@@ -70,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
         String json = mPreferences.getString(KEY_DATA, "");
         if( !json.isEmpty() ){
             Gson gson = new Gson();
-            dataSource = gson.fromJson(json, DataSource.class);
+            petDataSource = gson.fromJson(json, PetDataSource.class);
         } else {
-            dataSource = new DataSource();
+            petDataSource = new PetDataSource();
         }
 
         // Set up RecyclerView to display pets
-        petAdapter = new PetAdapter(this, dataSource);
+        petAdapter = new PetAdapter(this, petDataSource);
         recyclerView.setAdapter(petAdapter);
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(this));
@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
                         PetAdapter.PetViewHolder petViewHolder
                                 = (PetAdapter.PetViewHolder) viewHolder;
                         int position = petViewHolder.getAdapterPosition();
-                        String petRemoved = dataSource.getName(position);
-                        dataSource.removeData(position);
+                        String petRemoved = petDataSource.getName(position);
+                        petDataSource.removeData(position);
                         Toast.makeText(MainActivity.this,
                                 petRemoved + " removed!", Toast.LENGTH_SHORT).show();
                         petAdapter.notifyDataSetChanged();
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if( requestCode == REQUEST_NEW_PET && resultCode == Activity.RESULT_OK){
-            id = data.getStringExtra(DataEntry.KEY_ID);
+            id = data.getStringExtra(PetDataEntry.KEY_ID);
             // Retrieve type from Firebase
             database = FirebaseDatabase.getInstance();
             rootRef = database.getReference();
@@ -133,17 +133,20 @@ public class MainActivity extends AppCompatActivity {
                         if (type.equals("fish")) {
                             name = "fish";
                             bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_clown_fish_svgrepo_com));
-                            path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+                            path = Utils.encodeTobase64(bitmap);
+                            //path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
                         } else if (type.equals("plant")) {
                             name = "plant";
                             bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_plant_svgrepo_com));
-                            path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+                            path = Utils.encodeTobase64(bitmap);
+                            //path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
                         } else {
                             name = "hamster";
                             bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_svgrepo_com));
-                            path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
+                            path = Utils.encodeTobase64(bitmap);
+                            //path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
                         }
-                        dataSource.addData(name, path, type, id);
+                        petDataSource.addData(name, path, type, id);
                         petAdapter.notifyDataSetChanged();
                     }
                 }
@@ -160,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         SharedPreferences.Editor prefsEditor = mPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(dataSource);
+        String json = gson.toJson(petDataSource);
         prefsEditor.putString(KEY_DATA,json);
         prefsEditor.apply();
     }

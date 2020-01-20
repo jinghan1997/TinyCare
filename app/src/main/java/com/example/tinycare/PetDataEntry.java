@@ -19,12 +19,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-public class DataEntry extends AppCompatActivity {
+public class PetDataEntry extends AppCompatActivity {
 
     final String KEY_DATA = "data";
     final String PREF_FILE = "mainsharedpref";
     SharedPreferences mPreferences;
-    DataSource dataSource;
+    PetDataSource petDataSource;
 
     EditText editTextIdEntry;
     Button buttonOK;
@@ -46,7 +46,7 @@ public class DataEntry extends AppCompatActivity {
         String json = mPreferences.getString(KEY_DATA, "");
         if( !json.isEmpty() ){
             Gson gson = new Gson();
-            dataSource = gson.fromJson(json, DataSource.class);
+            petDataSource = gson.fromJson(json, PetDataSource.class);
         }
 
         // Set up OK button to return to MainActivy
@@ -64,8 +64,8 @@ public class DataEntry extends AppCompatActivity {
                     public void onDataChange(DataSnapshot snapshot) {
                         if (snapshot.child(idEntered).exists()) {
                             // Check if ID is already added
-                            if (dataSource != null && dataSource.idAlreadyAdded(idEntered)) {
-                                Toast.makeText(DataEntry.this,
+                            if (petDataSource != null && petDataSource.idAlreadyAdded(idEntered)) {
+                                Toast.makeText(PetDataEntry.this,
                                         "ID is already added", Toast.LENGTH_LONG).show();
                             } else {
                                 idExists = true;
@@ -76,7 +76,7 @@ public class DataEntry extends AppCompatActivity {
                                 finish();
                             }
                         } else {
-                            Toast.makeText(DataEntry.this,
+                            Toast.makeText(PetDataEntry.this,
                                     "ID does not exist", Toast.LENGTH_LONG).show();
                         }
                     }

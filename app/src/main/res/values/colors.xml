@@ -3,4 +3,19 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorDefaultCard">#979797</color>
+    <color name="colorDefaultHeader">#696969</color>
+
+    <color name="colorFullText">#0E7800</color>
+    <color name="colorFullHeader">#17B155</color>
+    <color name="colorFullCard">#1BE393</color>
+
+    <color name="colorMidHeader">#514A9D</color>
+    <color name="colorMidCard">#97AFD3</color>
+
+    <color name="colorEmptyText">#D82828</color>
+    <color name="colorEmptyCard">#FF9C9C</color>
+
+    <color name="colorBackgroundStatus">#AFF1E7</color>
 </resources>

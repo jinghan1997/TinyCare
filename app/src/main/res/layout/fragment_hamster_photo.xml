@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/hamsterPhotoDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check HAMSTER1's current activity."
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"/>
+
+    <View
+        android:layout_below="@id/hamsterPhotoDesc"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
+
+    <ImageView
+        android:id="@+id/hamsterPhoto"
+        android:src="@drawable/ic_refresh_black_24dp"
+        android:paddingHorizontal="10sp"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/hamsterPhotoProgressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/hamsterPhotoFab"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_camera_alt_white_24dp" />
+
+
+</RelativeLayout>
