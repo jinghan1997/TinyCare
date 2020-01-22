@@ -22,6 +22,12 @@
         <activity android:name=".HamsterActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".FishActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".PlantActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -13,22 +13,21 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HamsterActivity extends AppCompatActivity {
+public class FishActivity extends AppCompatActivity {
 
     private ActionBar bottomNavigationBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hamster);
+        setContentView(R.layout.activity_fish);
 
         // Set up bottom navigation bar
         bottomNavigationBar = getSupportActionBar();
-        BottomNavigationView navigation = findViewById(R.id.hamster_bottom_nav);
+        BottomNavigationView navigation = findViewById(R.id.fish_bottom_nav);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        bottomNavigationBar.setTitle("HamsterCare");
-        loadFragment(new HamsterMainFragment());
-
+        bottomNavigationBar.setTitle("FishCare");
+        loadFragment(new FishMainFragment());
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -37,17 +36,17 @@ public class HamsterActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.hamster_care:
-                    bottomNavigationBar.setTitle("HamsterCare");
-                    loadFragment(new HamsterMainFragment());
+                case R.id.fish_care:
+                    bottomNavigationBar.setTitle("FishCare");
+                    loadFragment(new FishMainFragment());
                     return true;
-                case R.id.hamster_photo:
+                case R.id.fish_photo:
                     bottomNavigationBar.setTitle("Photo");
-                    loadFragment(new HamsterPhotoFragment());
+                    loadFragment(new FishPhotoFragment());
                     return true;
-                case R.id.hamster_settings:
+                case R.id.fish_settings:
                     bottomNavigationBar.setTitle("Settings");
-                    loadFragment(new HamsterSettingsFragment());
+                    loadFragment(new FishSettingsFragment());
                     return true;
             }
             return false;
@@ -56,7 +55,7 @@ public class HamsterActivity extends AppCompatActivity {
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.hamster_container, fragment);
+        transaction.replace(R.id.fish_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -64,19 +63,19 @@ public class HamsterActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_hamster, menu);
+        getMenuInflater().inflate(R.menu.menu_fish, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.hamster_help) {
-            Intent intent = new Intent(this, HamsterHelpActivity.class);
+        if (id == R.id.fish_help) {
+            Intent intent = new Intent(this, FishHelpActivity.class);
             startActivity(intent);
             return true;
         }
-        if (id == R.id.hamster_about) {
+        if (id == R.id.fish_about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
             return true;

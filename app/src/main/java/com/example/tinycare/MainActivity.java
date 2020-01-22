@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.e("jeremy", databaseError.getMessage());
+                    Log.e("Li Ying", databaseError.getMessage());
                 }
             });
         }

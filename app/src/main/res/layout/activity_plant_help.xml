@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillViewport="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundStatus">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginHorizontal="5sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+
+
+        <TextView
+            android:text="How to Use"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingTop="20sp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Bottom Navigation Bar"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10sp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/hamster_bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="@string/hamster_help_bottom_nav"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Feed Tab"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="30sp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/hamster_feed_tab"
+            android:layout_gravity="center"
+            android:paddingTop="10sp"
+            android:layout_width="150dp"
+            android:layout_height="300dp"/>
+
+        <TextView
+            android:text="@string/hamster_feed_tab"
+            android:gravity="left"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/hamster_activate_auto_top_up"
+            android:paddingTop="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="@string/hamster_activate_auto_top_up"
+            android:paddingTop="10sp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/hamster_food_card"
+            android:layout_gravity="center"
+            android:paddingTop="20sp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:text="@string/hamster_food_card"
+            android:gravity="left"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/hamster_water_card"
+            android:layout_gravity="center"
+            android:paddingTop="20sp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:text="@string/hamster_water_card"
+            android:gravity="left"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Photo Tab"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="30sp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/hamster_photo_tab"
+            android:layout_gravity="center"
+            android:paddingTop="10sp"
+            android:layout_width="150dp"
+            android:layout_height="300dp"/>
+
+        <TextView
+            android:text="@string/hamster_photo_tab"
+            android:gravity="left"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Settings Tab"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="30sp"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/hamster_settings_tab"
+            android:layout_gravity="center"
+            android:paddingTop="10sp"
+            android:layout_width="150dp"
+            android:layout_height="300dp"/>
+
+        <TextView
+            android:text="@string/hamster_settings_tab"
+            android:gravity="left"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/hamster_edit_name"
+            android:layout_gravity="center"
+            android:paddingTop="10sp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="@string/hamster_edit_name"
+            android:gravity="left"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/hamster_profile_picture"
+            android:layout_gravity="center"
+            android:paddingTop="20sp"
+            android:layout_width="300dp"
+            android:layout_height="150dp"/>
+
+        <TextView
+            android:text="@string/hamster_profile_picture"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"/>
+
+        <ImageView
+            android:src="@drawable/hamster_popup_options"
+            android:layout_gravity="center"
+            android:paddingTop="20sp"
+            android:layout_width="300dp"
+            android:layout_height="250dp"/>
+
+        <TextView
+            android:text="@string/hamster_popup_options"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"/>
+
+    </LinearLayout>
+
+</ScrollView>

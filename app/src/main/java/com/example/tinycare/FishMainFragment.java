@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class HamsterMainFragment extends Fragment {
+public class FishMainFragment extends Fragment {
 
     View view;
 
@@ -43,30 +43,33 @@ public class HamsterMainFragment extends Fragment {
     Bitmap dpBitmap;
     String id;
 
-    String foodLevel;
-    String waterLevel;
+    String foodIsHigh;
+    String waterIsLow;
 
-    TextView hamsterName;
-    ImageView hamsterDpMain;
-    TextView hamsterMainDescText;
+    TextView fishName;
+    ImageView fishDpMain;
+    TextView fishMainDescText;
     Switch autoTopUpSwitch;
     TextView foodAmtText;
     TextView waterAmtText;
+    TextView cleanlinessAmtText;
     ImageView foodPicture;
     ImageView waterPicture;
+    ImageView cleanlinessPicture;
     View foodViewBanner;
     View waterViewBanner;
+    View cleanlinessViewBanner;
     CardView foodCardBackground;
     CardView waterCardBackground;
+    CardView cleanlinessCardBackground;
     Button topUpFoodButton;
     Button topUpWaterButton;
     TextView prevFoodTopUpDateTimeText;
-    TextView prevWaterTopUpDateTimeText;
 
     FirebaseDatabase database;
     DatabaseReference idReference;
 
-    public HamsterMainFragment() {
+    public FishMainFragment() {
         // Required empty public constructor
     }
 
@@ -75,25 +78,28 @@ public class HamsterMainFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_hamster_main, container, false);
+        view = inflater.inflate(R.layout.fragment_fish_main, container, false);
 
         // Get views needed
-        hamsterName = view.findViewById(R.id.hamsterName);
-        hamsterDpMain = view.findViewById(R.id.hamsterDpMain);
-        hamsterMainDescText = view.findViewById(R.id.hamsterMainDescText);
-        autoTopUpSwitch = view.findViewById(R.id.hamsterAutoTopUpSwitch);
-        foodAmtText = view.findViewById(R.id.hamsterFoodAmtText);
-        waterAmtText = view.findViewById(R.id.hamsterWaterAmtText);
-        foodPicture = view.findViewById(R.id.hamsterFoodPicture);
-        waterPicture = view.findViewById(R.id.hamsterWaterPicture);
-        foodViewBanner = view.findViewById(R.id.hamsterFoodViewBanner);
-        waterViewBanner = view.findViewById(R.id.hamsterWaterViewBanner);
-        foodCardBackground = view.findViewById(R.id.hamsterFoodCardBackground);
-        waterCardBackground = view.findViewById(R.id.hamsterWaterCardBackground);
-        topUpFoodButton = view.findViewById(R.id.hamsterTopUpFoodButton);
-        topUpWaterButton = view.findViewById(R.id.hamsterTopUpWaterButton);
-        prevFoodTopUpDateTimeText = view.findViewById(R.id.hamsterPrevFoodTopUpDateTimeText);
-        prevWaterTopUpDateTimeText = view.findViewById(R.id.hamsterPrevWaterTopUpDateTimeText);
+        fishName = view.findViewById(R.id.fishName);
+        fishDpMain = view.findViewById(R.id.fishDpMain);
+        fishMainDescText = view.findViewById(R.id.fishMainDescText);
+        autoTopUpSwitch = view.findViewById(R.id.fishAutoTopUpSwitch);
+        foodCardBackground = view.findViewById(R.id.fishFoodCardBackground);
+        waterCardBackground = view.findViewById(R.id.fishWaterCardBackground);
+        cleanlinessCardBackground = view.findViewById(R.id.fishCleanlinessCardBackground);
+        foodViewBanner = view.findViewById(R.id.fishFoodViewBanner);
+        waterViewBanner = view.findViewById(R.id.fishWaterViewBanner);
+        cleanlinessViewBanner = view.findViewById(R.id.fishCleanlinessViewBanner);
+        topUpFoodButton = view.findViewById(R.id.fishTopUpFoodButton);
+        topUpWaterButton = view.findViewById(R.id.fishTopUpWaterButton);
+        foodPicture = view.findViewById(R.id.fishFoodPicture);
+        waterPicture = view.findViewById(R.id.fishWaterPicture);
+        cleanlinessPicture = view.findViewById(R.id.fishCleanlinessPicture);
+        foodAmtText = view.findViewById(R.id.fishFoodAmtText);
+        waterAmtText = view.findViewById(R.id.fishWaterAmtText);
+        cleanlinessAmtText = view.findViewById(R.id.fishCleanlinessAmtText);
+        prevFoodTopUpDateTimeText = view.findViewById(R.id.fishPrevFoodTopUpDateTimeText);
 
         // Load petDataSource and entryNo from shared Preferences
         mPreferences = getContext().getSharedPreferences(PREF_FILE, MODE_PRIVATE);
@@ -106,26 +112,26 @@ public class HamsterMainFragment extends Fragment {
         }
         entryNo = mPreferences.getInt(KEY_ENTRY_NUMBER, 0);
 
-        // Get hamster name, profile picture and id
+        // Get fish name, profile picture and id
         name = petDataSource.getName(entryNo);
         dpBitmap = petDataSource.getImage(entryNo);
         id = petDataSource.getId(entryNo);
 
-        // Display hamster name and profile picture
-        hamsterName.setText("Hello, " + name + "!");
-        hamsterMainDescText.setText("Check " + name + "'s food and water levels.");
-        hamsterDpMain.setImageBitmap(dpBitmap);
+        // Display fish name and profile picture
+        fishName.setText("Hello, " + name + "!");
+        fishMainDescText.setText("Check " + name + "'s food and water levels and water cleanliness.");
+        fishDpMain.setImageBitmap(dpBitmap);
 
         // Get Firebase Realtime Database References
         database = FirebaseDatabase.getInstance();
         idReference = database.getReference().child(id);
         final DatabaseReference autoTopUp = idReference.child("autoTopUpSwitch");
-        final DatabaseReference foodAmt = idReference.child("foodAmt");
-        final DatabaseReference waterAmt = idReference.child("waterAmt");
+        final DatabaseReference withinHours = idReference.child("withinHours");
+        final DatabaseReference waterLow = idReference.child("waterLow");
+        final DatabaseReference waterDirty = idReference.child("waterDirty");
         final DatabaseReference topUpFood = idReference.child("topUpFood");
         final DatabaseReference topUpWater = idReference.child("topUpWater");
         final DatabaseReference prevFoodTopUpDateTime = idReference.child("prevFoodTopUpDateTime");
-        final DatabaseReference prevWaterTopUpDateTime = idReference.child("prevWaterTopUpDateTime");
 
         // Set up auto-top up switch previous value and checked/unchecked listener
         autoTopUp.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -154,36 +160,22 @@ public class HamsterMainFragment extends Fragment {
         });
 
         // Check food value and set image and text accordingly
-        foodAmt.addValueEventListener(new ValueEventListener() {
+        withinHours.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String foodValue = dataSnapshot.getValue(String.class);
-                foodLevel = foodValue;
-                if (foodValue.equals("full")) {
-                    foodAmtText.setText("Full");
+                String withinHoursValue = dataSnapshot.getValue(String.class);
+                foodIsHigh = withinHoursValue;
+                if (withinHoursValue.equals("true")) {
+                    foodAmtText.setText("Yes");
                     foodAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorFullText));
                     foodPicture.setImageResource(R.drawable.ic_hamster_food_full);
-                    foodViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorFullHeader));
-                    foodCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorFullCard));
-                    topUpFoodButton.setBackground(getResources().getDrawable(R.drawable.custom_button_grey));
-                } else if (foodValue.equals("mid")) {
-                    foodAmtText.setText("Mid");
-                    foodAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorFullText));
-                    foodPicture.setImageResource(R.drawable.ic_hamster_food_mid);
                     foodViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMidHeader));
                     foodCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMidCard));
                     topUpFoodButton.setBackground(getResources().getDrawable(R.drawable.custom_button_blue));
-                } else if (foodValue.equals("low")) {
-                    foodAmtText.setText("Low");
-                    foodAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
-                    foodPicture.setImageResource(R.drawable.ic_hamster_food_low);
-                    foodViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
-                    foodCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyCard));
-                    topUpFoodButton.setBackground(getResources().getDrawable(R.drawable.custom_button_red));
-                } else if (foodValue.equals("empty")) {
-                    foodAmtText.setText("Empty");
+                } else if (withinHoursValue.equals("false")) {
+                    foodAmtText.setText("No");
                     foodAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
                     foodPicture.setImageResource(R.drawable.ic_hamster_food_empty);
                     foodViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
@@ -193,7 +185,7 @@ public class HamsterMainFragment extends Fragment {
             }
             @Override
             public void onCancelled(DatabaseError error) {
-                Log.e("jinghan", "Failed to read value.", error.toException());
+                Log.e("Li Ying", "Failed to read value.", error.toException());
             }
         });
 
@@ -201,8 +193,8 @@ public class HamsterMainFragment extends Fragment {
         topUpFoodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (foodLevel.equals("full")) {
-                    Toast.makeText(getActivity(), "Food is full!", Toast.LENGTH_LONG).show();
+                if (foodIsHigh.equals("true")) {
+                    Toast.makeText(getActivity(), "Already fed recently!", Toast.LENGTH_LONG).show();
                 } else {
                     topUpFood.setValue("true");
                     Toast.makeText(getActivity(), "Food is added!", Toast.LENGTH_LONG).show();
@@ -226,38 +218,24 @@ public class HamsterMainFragment extends Fragment {
         });
 
         // Check water value and set image and text accordingly
-        waterAmt.addValueEventListener(new ValueEventListener() {
+        waterLow.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String waterValue = dataSnapshot.getValue(String.class);
-                waterLevel = waterValue;
-                if (waterValue.equals("full")) {
-                    waterAmtText.setText("Full");
+                String waterLowValue = dataSnapshot.getValue(String.class);
+                waterIsLow = waterLowValue;
+                if (waterLowValue.equals("false")) {
+                    waterAmtText.setText("Sufficient");
                     waterAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorFullText));
                     waterPicture.setImageResource(R.drawable.ic_hamster_water_full);
-                    waterViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorFullHeader));
-                    waterCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorFullCard));
-                    topUpWaterButton.setBackground(getResources().getDrawable(R.drawable.custom_button_grey));
-                } else if (waterValue.equals("mid")) {
-                    waterAmtText.setText("Mid");
-                    waterAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorFullText));
-                    waterPicture.setImageResource(R.drawable.ic_hamster_water_mid);
                     waterViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMidHeader));
                     waterCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMidCard));
                     topUpWaterButton.setBackground(getResources().getDrawable(R.drawable.custom_button_blue));
-                } else if (waterValue.equals("low")) {
+                } else if (waterLowValue.equals("true")) {
                     waterAmtText.setText("Low");
                     waterAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
                     waterPicture.setImageResource(R.drawable.ic_hamster_water_low);
-                    waterViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
-                    waterCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyCard));
-                    topUpWaterButton.setBackground(getResources().getDrawable(R.drawable.custom_button_red));
-                } else if (waterValue.equals("empty")) {
-                    waterAmtText.setText("Empty");
-                    waterAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
-                    waterPicture.setImageResource(R.drawable.ic_hamster_water_empty);
                     waterViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
                     waterCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyCard));
                     topUpWaterButton.setBackground(getResources().getDrawable(R.drawable.custom_button_red));
@@ -273,8 +251,8 @@ public class HamsterMainFragment extends Fragment {
         topUpWaterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (waterLevel.equals("full")) {
-                    Toast.makeText(getActivity(), "Water is full!", Toast.LENGTH_LONG).show();
+                if (waterIsLow.equals("false")) {
+                    Toast.makeText(getActivity(), "Water is sufficient!", Toast.LENGTH_LONG).show();
                 } else {
                     topUpWater.setValue("true");
                     Toast.makeText(getActivity(), "Water is added!", Toast.LENGTH_LONG).show();
@@ -282,21 +260,34 @@ public class HamsterMainFragment extends Fragment {
             }
         });
 
-        // Set listener to update date and time for last top-up of water
-        prevWaterTopUpDateTime.addValueEventListener(new ValueEventListener() {
+        // Check water cleanliness and set image and text accordingly
+        waterDirty.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String dateTime = dataSnapshot.getValue(String.class);
-                prevWaterTopUpDateTimeText.setText("Last Top-Up: " + dateTime);
+                String waterDirtyValue = dataSnapshot.getValue(String.class);
+                if (waterDirtyValue.equals("false")) {
+                    cleanlinessAmtText.setText("Clean");
+                    cleanlinessAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorFullText));
+                    cleanlinessPicture.setImageResource(R.drawable.ic_fish_tank);
+                    cleanlinessViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMidHeader));
+                    cleanlinessCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMidCard));
+                } else if (waterDirtyValue.equals("true")) {
+                    cleanlinessAmtText.setText("Dirty");
+                    cleanlinessAmtText.setTextColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
+                    cleanlinessPicture.setImageResource(R.drawable.ic_fish_tank_dirty);
+                    cleanlinessViewBanner.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyText));
+                    cleanlinessCardBackground.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorEmptyCard));
+                }
             }
             @Override
             public void onCancelled(DatabaseError error) {
-                Log.i("Li Ying", "Failed to read value.", error.toException());
+                Log.e("Li Ying", "Failed to read value.", error.toException());
             }
         });
 
         return view;
     }
+
 }

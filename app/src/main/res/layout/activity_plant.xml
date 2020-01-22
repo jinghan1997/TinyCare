@@ -5,23 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HamsterActivity">
+    tools:context=".PlantActivity">
 
     <FrameLayout
-        android:id="@+id/hamster_container"
+        android:id="@+id/plant_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/hamster_bottom_nav"/>
+        android:layout_above="@+id/plant_bottom_nav"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/hamster_bottom_nav"
+        android:id="@+id/plant_bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         app:itemBackground="?selectableItemBackgroundBorderless"
         app:itemHorizontalTranslationEnabled="true"
-        app:menu="@menu/menu_hamster_bottom_nav"
+        app:menu="@menu/menu_plant_bottom_nav"
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@drawable/nav_item_color_state"
         />

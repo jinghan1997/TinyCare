@@ -32,7 +32,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     public PetViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = mInflater.inflate(R.layout.pet, viewGroup,
                 false);
-        return new PetViewHolder(itemView, context, petDataSource, i);
+        return new PetViewHolder(itemView, context);
     }
 
     @Override
@@ -40,6 +40,8 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
         petViewHolder.textViewName.setText(  petDataSource.getName(i));
         petViewHolder.imageViewPet.setImageBitmap(
                 petDataSource.getImage(i));
+        petViewHolder.i = i;
+        petViewHolder.petDataSource = petDataSource;
     }
 
     @Override
@@ -50,32 +52,57 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     static class PetViewHolder extends RecyclerView.ViewHolder{
         ImageView imageViewPet;
         TextView textViewName;
+        Context context;
+        int i;
+        PetDataSource petDataSource;
 
         final static String KEY_ENTRY_NUMBER = "entry_number";
         final String PREF_FILE = "mainsharedpref";
         SharedPreferences mPreferences;
 
 
-        PetViewHolder(View view, final Context context, final PetDataSource petDataSource, final int i){
+        PetViewHolder(View view, Context context){
             super(view);
             imageViewPet = view.findViewById(R.id.cardViewImage);
             textViewName = view.findViewById(R.id.cardViewTextName);
             mPreferences = context.getSharedPreferences(PREF_FILE, MODE_PRIVATE);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            this.context = context;
+
+            view.setOnClickListener(new petOnClickListener());
+        }
+
+        // create inner classes for event listeners
+        // we can't use anonymous classes because we need to reference non-final vars
+        private class petOnClickListener implements View.OnClickListener {
+            @Override
+            public void onClick(View view) {
+                // Check for internet connection to prevent crashing later
+                if (!Utils.isNetworkAvailable(context)) {
+                    Toast.makeText(context,
+                            "Not connected to Internet", Toast.LENGTH_LONG).show();
+                } else {
                     if (petDataSource.getType(i).equals("hamster")) {
                         Intent intent = new Intent(context, HamsterActivity.class);
                         SharedPreferences.Editor editor = mPreferences.edit();
                         editor.putInt(KEY_ENTRY_NUMBER, i);
                         editor.apply();
-                        Toast.makeText(view.getContext(),
-                                textViewName.getText().toString() + " " + i,
-                                Toast.LENGTH_LONG).show();
+                        context.startActivity(intent);
+                    } else if (petDataSource.getType(i).equals("fish")) {
+                        Intent intent = new Intent(context, FishActivity.class);
+                        SharedPreferences.Editor editor = mPreferences.edit();
+                        editor.putInt(KEY_ENTRY_NUMBER, i);
+                        editor.apply();
+                        context.startActivity(intent);
+                    } else if (petDataSource.getType(i).equals("plant")) {
+                        Intent intent = new Intent(context, PlantActivity.class);
+                        SharedPreferences.Editor editor = mPreferences.edit();
+                        editor.putInt(KEY_ENTRY_NUMBER, i);
+                        editor.apply();
                         context.startActivity(intent);
                     }
                 }
-            });
+            }
+
         }
     }
 

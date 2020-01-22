@@ -40,7 +40,7 @@ import java.io.IOException;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
-public class HamsterSettingsFragment extends Fragment {
+public class PlantSettingsFragment extends Fragment {
 
     View view;
 
@@ -57,7 +57,7 @@ public class HamsterSettingsFragment extends Fragment {
     FloatingActionButton chooseImage;
     FloatingActionButton saveChanges;
     EditText editName;
-    ImageView hamsterDpSettings;
+    ImageView plantDpSettings;
 
     String name;
     Bitmap dpBitmap;
@@ -66,7 +66,7 @@ public class HamsterSettingsFragment extends Fragment {
     String url;
     Bitmap newImageBitmap;
 
-    public HamsterSettingsFragment() {
+    public PlantSettingsFragment() {
         // Required empty public constructor
     }
 
@@ -75,13 +75,13 @@ public class HamsterSettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_hamster_settings, container, false);
+        view = inflater.inflate(R.layout.fragment_plant_settings, container, false);
 
         // Find views needed
-        editName = view.findViewById(R.id.hamsterEditName);
-        chooseImage = view.findViewById(R.id.hamsterChooseImage);
-        hamsterDpSettings = view.findViewById(R.id.hamsterDpSettings);
-        saveChanges = view.findViewById(R.id.hamsterSaveChanges);
+        editName = view.findViewById(R.id.plantEditName);
+        chooseImage = view.findViewById(R.id.plantChooseImage);
+        plantDpSettings = view.findViewById(R.id.plantDpSettings);
+        saveChanges = view.findViewById(R.id.plantSaveChanges);
 
         // Load petDataSource and entryNo from shared Preferences
         mPreferences = getContext().getSharedPreferences(PREF_FILE, MODE_PRIVATE);
@@ -94,17 +94,17 @@ public class HamsterSettingsFragment extends Fragment {
         }
         entryNo = mPreferences.getInt(KEY_ENTRY_NUMBER, 0);
 
-        // Get hamster name, profile picture and id
+        // Get plant name, profile picture and id
         name = petDataSource.getName(entryNo);
         dpBitmap = petDataSource.getImage(entryNo);
         id = petDataSource.getId(entryNo);
 
-        // Display hamster name and profile picture
+        // Display plant name and profile picture
         editName.setText(name);
-        hamsterDpSettings.setImageBitmap(dpBitmap);
+        plantDpSettings.setImageBitmap(dpBitmap);
         newImageBitmap = dpBitmap;
 
-        // Firebase references to retrieve HamsterCare photo
+        // Firebase references to retrieve PlantCare photo
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference picUrl = database.getReference().child(id).child("picUrl");
         picUrl.addValueEventListener(new ValueEventListener() {
@@ -119,13 +119,13 @@ public class HamsterSettingsFragment extends Fragment {
             }
         });
 
-        // Choose image from 4 options - Default, Gallery, Camera, or HamsterCare Photo
+        // Choose image from 4 options - Default, Gallery, Camera, or FishCare Photo
         chooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String[] choices = {"Default Picture",
                         "Choose from Gallery",
-                        "Take a Photo", "Latest HamsterCare Photo"};
+                        "Take a Photo", "Latest FishCare Photo"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Upload Image");
                 builder.setItems(choices, new DialogInterface.OnClickListener() {
@@ -134,8 +134,8 @@ public class HamsterSettingsFragment extends Fragment {
                         // the user clicked on colors[which]
                         if (which == 0) {
                             // Select default image
-                            hamsterDpSettings.setImageResource(R.drawable.ic_hamster_svgrepo_com);
-                            newImageBitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_svgrepo_com));
+                            plantDpSettings.setImageResource(R.drawable.ic_clown_fish_svgrepo_com);
+                            newImageBitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_clown_fish_svgrepo_com));
                         } else if (which == 1) {
                             // Select image from gallery
                             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -148,13 +148,13 @@ public class HamsterSettingsFragment extends Fragment {
                                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                             }
                         } else if (which == 3) {
-                            // Ensure that a photo exists in HamsterCare
+                            // Ensure that a photo exists in FishCare
                             if (url == null || url.equals("")) {
                                 Toast.makeText(getContext(),
-                                        "HamsterCare photo does not exist",
+                                        "FishCare photo does not exist",
                                         Toast.LENGTH_LONG).show();
                             } else {
-                                // Choose latest photo of hamster
+                                // Choose latest photo of plant
                                 FirebaseStorage storage = FirebaseStorage.getInstance();
                                 StorageReference httpsRef = storage.getReferenceFromUrl(url);
                                 try {
@@ -163,7 +163,7 @@ public class HamsterSettingsFragment extends Fragment {
                                         @Override
                                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                             Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                                            hamsterDpSettings.setImageBitmap(bitmap);
+                                            plantDpSettings.setImageBitmap(bitmap);
                                             newImageBitmap = bitmap;
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
@@ -199,6 +199,7 @@ public class HamsterSettingsFragment extends Fragment {
         });
 
         return view;
+
     }
 
     @Override
@@ -209,12 +210,12 @@ public class HamsterSettingsFragment extends Fragment {
             Bitmap thumbnail = data.getParcelableExtra("data");
             Uri fullPhotoUri = data.getData();
             // bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), fullPhotoUri);
-            hamsterDpSettings.setImageURI(fullPhotoUri);
-            newImageBitmap = ((BitmapDrawable)hamsterDpSettings.getDrawable()).getBitmap();
+            plantDpSettings.setImageURI(fullPhotoUri);
+            newImageBitmap = ((BitmapDrawable)plantDpSettings.getDrawable()).getBitmap();
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            hamsterDpSettings.setImageBitmap(imageBitmap);
+            plantDpSettings.setImageBitmap(imageBitmap);
             newImageBitmap = imageBitmap;
         }
     }
@@ -228,4 +229,5 @@ public class HamsterSettingsFragment extends Fragment {
         prefsEditor.putString(KEY_DATA,json);
         prefsEditor.apply();
     }
+
 }
