@@ -19,15 +19,43 @@
         <activity android:name=".PetDataEntry"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".HelpActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".AboutActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
         <activity android:name=".HamsterActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".HamsterHelpActivity"
+            android:parentActivityName=".HamsterActivity">
+        </activity>
+        <activity android:name=".HamsterAboutActivity"
+            android:parentActivityName=".HamsterActivity">
+        </activity>
+
         <activity android:name=".FishActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".FishHelpActivity"
+            android:parentActivityName=".FishActivity">
+        </activity>
+        <activity android:name=".FishAboutActivity"
+            android:parentActivityName=".FishActivity">
+        </activity>
+
         <activity android:name=".PlantActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity android:name=".PlantHelpActivity"
+            android:parentActivityName=".PlantActivity">
+        </activity>
+        <activity android:name=".PlantAboutActivity"
+            android:parentActivityName=".PlantActivity">
+        </activity>
+
     </application>
 
 </manifest>

@@ -77,7 +77,7 @@ public class HamsterActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.hamster_about) {
-            Intent intent = new Intent(this, AboutActivity.class);
+            Intent intent = new Intent(this, HamsterAboutActivity.class);
             startActivity(intent);
             return true;
         }

@@ -76,7 +76,7 @@ public class FishActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.fish_about) {
-            Intent intent = new Intent(this, AboutActivity.class);
+            Intent intent = new Intent(this, FishAboutActivity.class);
             startActivity(intent);
             return true;
         }
