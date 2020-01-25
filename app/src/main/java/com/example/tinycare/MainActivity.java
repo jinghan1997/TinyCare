@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     PetDataSource petDataSource;
     RecyclerView recyclerView;
     PetAdapter petAdapter;
+    FloatingActionButton deleteFab;
 
     final static int REQUEST_NEW_PET = 2000;
     String id;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get references to widgets
         recyclerView = findViewById(R.id.petRecyclerView);
+        deleteFab = findViewById(R.id.deleteFab);
 
         // Set up floating action button to add new pet
         FloatingActionButton fab = findViewById(R.id.main_fab);
@@ -81,34 +83,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(petAdapter);
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(this));
-
-        // Delete pet from RecyclerView upon swiping
-        ItemTouchHelper.SimpleCallback simpleCallback = new
-                ItemTouchHelper.SimpleCallback( 0 , ItemTouchHelper.LEFT |
-                        ItemTouchHelper.RIGHT ) {
-                    @Override
-                    public boolean onMove (@NonNull RecyclerView recyclerView,
-                                           @NonNull RecyclerView.ViewHolder viewHolder, @NonNull
-                                                   RecyclerView.ViewHolder viewHolder1) {
-                        return false ;
-                    }
-                    @Override
-                    public void onSwiped (@NonNull RecyclerView.ViewHolder
-                                                  viewHolder, int i) {
-                        //code to delete the view goes here
-                        PetAdapter.PetViewHolder petViewHolder
-                                = (PetAdapter.PetViewHolder) viewHolder;
-                        int position = petViewHolder.getAdapterPosition();
-                        String petRemoved = petDataSource.getName(position);
-                        petDataSource.removeData(position);
-                        Toast.makeText(MainActivity.this,
-                                petRemoved + " removed!", Toast.LENGTH_SHORT).show();
-                        petAdapter.notifyDataSetChanged();
-                    }
-                };
-        ItemTouchHelper itemTouchHelper
-                = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override

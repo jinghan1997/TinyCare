@@ -1,32 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="125dp"
-    android:layout_height="125dp"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="60dp">
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="15dp">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="140dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="15dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/colorDefaultCard">
 
-        <ImageView
-            android:id="@+id/cardViewImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:id="@+id/petCardRelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/cardViewTextName"
-            android:background="#7000"
-            android:text="Name position"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_alignBottom="@+id/cardViewImage"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"/>
+            <View
+                android:id="@+id/petViewBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/cardViewTextName"
+                android:layout_alignParentTop="true" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/cardViewTextName"
+                android:text="Pet Name"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/roboto_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="60dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="2dp"
+                android:textSize="25sp"
+                android:typeface="normal" />
 
-</androidx.cardview.widget.CardView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/deleteFab"
+                android:layout_alignRight="@id/petViewBanner"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_delete_white_24dp" />
+
+            <TextView
+                android:id="@+id/petType"
+                android:fontFamily="@font/roboto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/petViewBanner"
+                android:paddingStart="60dp"
+                android:paddingBottom="2dp"
+                android:text="Type:"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/petHardwareId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/petType"
+                android:paddingStart="60dp"
+                android:paddingBottom="2dp"
+                android:text="Hardware ID:"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/petDateAdded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/petHardwareId"
+                android:paddingStart="60dp"
+                android:paddingBottom="2dp"
+                android:text="Date Added:"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginLeft="20dp"
+        app:cardCornerRadius="60dp">
+
+    <ImageView
+        android:id="@+id/cardViewImage"
+        android:src="@drawable/ic_hamster_svgrepo_com"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

@@ -3,6 +3,7 @@ package com.example.tinycare;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PetDataSource {
 
@@ -15,7 +16,8 @@ public class PetDataSource {
     }
 
     void addData(String name, String path, String type, String id){
-        CardData c = new CardData(name, path, type, id);
+        Date date = new Date();
+        CardData c = new CardData(name, path, type, id, date);
         dataArrayList.add(c);
         idsAdded.add(id);
     }
@@ -56,6 +58,8 @@ public class PetDataSource {
         return dataArrayList.get(i).getId();
     }
 
+    Date getDate(int i) { return dataArrayList.get(i).getDate(); }
+
     Bitmap getImage(int i) {
         //String name = dataArrayList.get(i).getName();
         String path = dataArrayList.get(i).getPath();
@@ -72,12 +76,14 @@ public class PetDataSource {
         private String path;
         private String type;
         private String id;
+        private Date date;
 
-        private CardData(String name, String path, String type, String id){
+        private CardData(String name, String path, String type, String id, Date date){
             this.name = name;
             this.path = path;
             this.type = type;
             this.id = id;
+            this.date = date;
         }
 
         private String getName() {
@@ -103,5 +109,7 @@ public class PetDataSource {
         private String getId() {
             return id;
         }
+
+        private Date getDate() {return date;}
     }
 }

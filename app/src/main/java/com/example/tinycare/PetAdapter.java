@@ -1,6 +1,7 @@
 package com.example.tinycare;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -11,7 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -20,6 +27,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
     Context context;
     LayoutInflater mInflater;
     PetDataSource petDataSource;
+
 
     PetAdapter(Context context, PetDataSource petDataSource){
         mInflater = LayoutInflater.from(context);
@@ -37,9 +45,20 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PetViewHolder petViewHolder, int i) {
-        petViewHolder.textViewName.setText(  petDataSource.getName(i));
-        petViewHolder.imageViewPet.setImageBitmap(
-                petDataSource.getImage(i));
+        petViewHolder.textViewName.setText(petDataSource.getName(i));
+        petViewHolder.imageViewPet.setImageBitmap(petDataSource.getImage(i));
+        petViewHolder.petType.setText("Type: " + petDataSource.getType(i));
+        petViewHolder.petHardwareId.setText("Hardware ID: " + petDataSource.getId(i));
+
+        // Set Date Added
+        Date date = petDataSource.getDate(i);
+        if (date != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+            String strDate = formatter.format(date);
+            petViewHolder.petDateAdded.setText("Date Added: " + strDate);
+        }
+
+        // Variables needed for view.onClickListener
         petViewHolder.i = i;
         petViewHolder.petDataSource = petDataSource;
     }
@@ -49,9 +68,13 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
         return petDataSource.getSize();
     }
 
-    static class PetViewHolder extends RecyclerView.ViewHolder{
+    class PetViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewPet;
         TextView textViewName;
+        TextView petType;
+        TextView petHardwareId;
+        TextView petDateAdded;
+        FloatingActionButton deleteFab;
         Context context;
         int i;
         PetDataSource petDataSource;
@@ -65,10 +88,36 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
             super(view);
             imageViewPet = view.findViewById(R.id.cardViewImage);
             textViewName = view.findViewById(R.id.cardViewTextName);
+            petType = view.findViewById(R.id.petType);
+            petHardwareId = view.findViewById(R.id.petHardwareId);
+            petDateAdded = view.findViewById(R.id.petDateAdded);
+            deleteFab = view.findViewById(R.id.deleteFab);
             mPreferences = context.getSharedPreferences(PREF_FILE, MODE_PRIVATE);
             this.context = context;
 
+            // Set listener to enter pet activity when pet view is clicked
             view.setOnClickListener(new petOnClickListener());
+
+            // Set listener to delete pet when delete fab is clicked
+            deleteFab.setOnClickListener(new deleteOnClickListener());
+        }
+
+        // create inner classes for event listeners
+        // we can't use anonymous classes because we need to reference non-final vars
+        private class deleteOnClickListener implements View.OnClickListener {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Delete")
+                        .setMessage("Do you really want to delete pet?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                PetAdapter.this.petDataSource.removeData(getAdapterPosition());
+                                PetAdapter.this.notifyDataSetChanged();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+            }
         }
 
         // create inner classes for event listeners

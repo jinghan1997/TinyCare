@@ -17,28 +17,6 @@
             android:elevation="5dp"
             android:orientation="vertical">
 
-            <!--                <de.hdodenhof.circleimageview.CircleImageView-->
-            <!--                    android:id="@+id/hamsterDpMain"-->
-            <!--                    android:layout_width="125dp"-->
-            <!--                    android:layout_height="125dp"-->
-            <!--                    android:layout_gravity="center"-->
-            <!--                    android:src="@drawable/ic_hamster_svgrepo_com"-->
-            <!--                    app:civ_border_color="@color/colorAccent"-->
-            <!--                    app:civ_border_width="2dp"-->
-            <!--                    android:outlineProvider="none"-->
-            <!--                    android:elevation="2dp"/>-->
-
-
-            <!--            <ImageView-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                android:id="@+id/hamsterDpMain"-->
-            <!--                app:srcCompat="@drawable/ic_hamster_svgrepo_com"-->
-            <!--                android:layout_gravity="center"-->
-            <!--                android:layout_width="100dp"-->
-            <!--                android:layout_height="100dp"-->
-            <!--                android:outlineProvider="bounds"/>-->
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -241,12 +219,6 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-
-            <!--            <RelativeLayout-->
-            <!--            android:orientation="vertical"-->
-            <!--            android:layout_weight="1"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="match_parent">-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/hamsterWaterCardBackground"
                 android:layout_width="wrap_content"
