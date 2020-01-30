@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,10 +47,14 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PetViewHolder petViewHolder, int i) {
-        petViewHolder.textViewName.setText(petDataSource.getName(i));
+        String petName = petDataSource.getName(i);
+        String type = petDataSource.getType(i);
+
+        petViewHolder.textViewName.setText(petName.substring(0, 1).toUpperCase() + petName.substring(1));
         petViewHolder.imageViewPet.setImageBitmap(petDataSource.getImage(i));
         petViewHolder.petType.setText("Type: " + petDataSource.getType(i));
         petViewHolder.petHardwareId.setText("Hardware ID: " + petDataSource.getId(i));
+
 
         // Set Date Added
         Date date = petDataSource.getDate(i);
@@ -56,6 +62,15 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
             String strDate = formatter.format(date);
             petViewHolder.petDateAdded.setText("Date Added: " + strDate);
+        }
+
+        // Set background color for each pet
+        if (type.equals("hamster")) {
+            petViewHolder.petCard.setCardBackgroundColor(context.getResources().getColor(R.color.colorHamsterMainCard));
+        } else if (type.equals("fish")) {
+            petViewHolder.petCard.setCardBackgroundColor(context.getResources().getColor(R.color.colorFishMainCard));
+        } else if (type.equals("plant")) {
+            petViewHolder.petCard.setCardBackgroundColor(context.getResources().getColor(R.color.colorPlantMainCard));
         }
 
         // Variables needed for view.onClickListener
@@ -78,6 +93,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
         Context context;
         int i;
         PetDataSource petDataSource;
+        CardView petCard;
 
         final static String KEY_ENTRY_NUMBER = "entry_number";
         final String PREF_FILE = "mainsharedpref";
@@ -92,6 +108,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetViewHolder> {
             petHardwareId = view.findViewById(R.id.petHardwareId);
             petDateAdded = view.findViewById(R.id.petDateAdded);
             deleteFab = view.findViewById(R.id.deleteFab);
+            petCard = view.findViewById(R.id.petCard);
             mPreferences = context.getSharedPreferences(PREF_FILE, MODE_PRIVATE);
             this.context = context;
 

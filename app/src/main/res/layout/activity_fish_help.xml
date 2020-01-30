@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
-            android:src="@drawable/hamster_bottom_nav"
+            android:src="@drawable/fish_bottom_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -52,14 +52,14 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
-            android:src="@drawable/hamster_feed_tab"
+            android:src="@drawable/fish_care_tab"
             android:layout_gravity="center"
             android:paddingTop="10sp"
             android:layout_width="150dp"
             android:layout_height="300dp"/>
 
         <TextView
-            android:text="@string/hamster_feed_tab"
+            android:text="@string/fish_care_tab"
             android:gravity="left"
             android:paddingTop="10sp"
             android:layout_width="match_parent"
@@ -79,28 +79,42 @@
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:src="@drawable/hamster_food_card"
+            android:src="@drawable/fish_food_card"
             android:layout_gravity="center"
             android:paddingTop="20sp"
             android:layout_width="300dp"
             android:layout_height="200dp"/>
 
         <TextView
-            android:text="@string/hamster_food_card"
+            android:text="@string/fish_food_card"
             android:gravity="left"
             android:paddingTop="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:src="@drawable/hamster_water_card"
+            android:src="@drawable/fish_water_card"
             android:layout_gravity="center"
             android:paddingTop="20sp"
             android:layout_width="300dp"
             android:layout_height="200dp"/>
 
         <TextView
-            android:text="@string/hamster_water_card"
+            android:text="@string/fish_water_card"
+            android:gravity="left"
+            android:paddingTop="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/fish_cleanliness_card"
+            android:layout_gravity="center"
+            android:paddingTop="20sp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:text="@string/fish_cleanliness_card"
             android:gravity="left"
             android:paddingTop="10sp"
             android:layout_width="match_parent"
@@ -116,14 +130,14 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
-            android:src="@drawable/hamster_photo_tab"
+            android:src="@drawable/fish_photo_tab"
             android:layout_gravity="center"
             android:paddingTop="10sp"
             android:layout_width="150dp"
             android:layout_height="300dp"/>
 
         <TextView
-            android:text="@string/hamster_photo_tab"
+            android:text="@string/fish_photo_tab"
             android:gravity="left"
             android:paddingTop="10sp"
             android:layout_width="match_parent"
@@ -139,7 +153,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageView
-            android:src="@drawable/hamster_settings_tab"
+            android:src="@drawable/fish_settings_tab"
             android:layout_gravity="center"
             android:paddingTop="10sp"
             android:layout_width="150dp"
@@ -153,7 +167,7 @@
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:src="@drawable/hamster_edit_name"
+            android:src="@drawable/fish_edit_name"
             android:layout_gravity="center"
             android:paddingTop="10sp"
             android:layout_width="300dp"
@@ -167,28 +181,28 @@
             android:layout_height="wrap_content" />
 
         <ImageView
-            android:src="@drawable/hamster_profile_picture"
+            android:src="@drawable/fish_profile_picture"
             android:layout_gravity="center"
             android:paddingTop="20sp"
             android:layout_width="300dp"
             android:layout_height="150dp"/>
 
         <TextView
-            android:text="@string/hamster_profile_picture"
+            android:text="@string/fish_profile_picture"
             android:paddingTop="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"/>
 
         <ImageView
-            android:src="@drawable/hamster_popup_options"
+            android:src="@drawable/fish_popup_options"
             android:layout_gravity="center"
             android:paddingTop="20sp"
             android:layout_width="300dp"
             android:layout_height="250dp"/>
 
         <TextView
-            android:text="@string/hamster_popup_options"
+            android:text="@string/fish_popup_options"
             android:paddingTop="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

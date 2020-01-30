@@ -134,8 +134,8 @@ public class HamsterSettingsFragment extends Fragment {
                         // the user clicked on colors[which]
                         if (which == 0) {
                             // Select default image
-                            hamsterDpSettings.setImageResource(R.drawable.ic_hamster_svgrepo_com);
-                            newImageBitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_svgrepo_com));
+                            hamsterDpSettings.setImageResource(R.drawable.ic_hamster_icon);
+                            newImageBitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_icon));
                         } else if (which == 1) {
                             // Select image from gallery
                             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);

@@ -6,8 +6,9 @@
     </string>
 
     <string name="version">
-        HamsterCare v1.1
-        \nCredits to Professors Norman Lee and Cheung Ngai-Mann for their guidance and support
+        TinyCare v1.1
+        \nCredits to Mitsubishi Corp. and SUTD ISTD pillar for funding our project, and we thank
+        Professors Norman Lee and Cheung Ngai-Mann for their guidance and support.
     </string>
 
     <string name="contactUs">
@@ -16,21 +17,56 @@
         \n          8 Somapah Rd, Singapore 487372
     </string>
 
-    <string name="hamster_help_bottom_nav">
-        The bottom navigation bar allows movement between the primary functions in the app.
-        \n\nIt is split into 3 tabs - Feed, Photo and Settings (from left to right).
+    <string name="blank_main_activity">
+        Welcome to TinyCare!
+        \n\nTo start off, add a pet to TinyCare by clicking on the \"+\" button at the
+        bottom of the page.
+        \n\nThis will bring you to a new page to enter the details of the hardware you purchased.
     </string>
 
-    <string name="hamster_feed_tab">
-        The Feed tab allows automatic as well as manual topping-up of food and water.
-        \n\nThe right column displays information about the previous top-up of water, the amount of
-        water left, and allows the top-up of water through the \"Feed Me Water!\" button.
+    <string name="pet_data_entry">
+        Enter your Hardware ID.
+        \n\nThis ID should be given to you on the cover of your hardware packaging.
+    </string>
+
+    <string name="main_activity">
+        Basic details of your pet should appear after adding the corresponding correct Hardware ID.
+        \n\nThe default pet name and pet profile picture can be changed later in the Settings Tab
+        of the pet.
+        \n\nClick on your pet to access its TinyCare features and functions.
+        \n\nTo remove your pet from TinyCare, click on the delete button on the top right corner of
+        the pet. Don\'t worry if you accidentally remove your pet, just add it again.
+    </string>
+
+    <string name="hamster_help_bottom_nav">
+        The bottom navigation bar allows movement between the primary functions in the app.
+        \n\nIt is split into 3 tabs - Care, Photo and Settings (from left to right).
+    </string>
+
+    <string name="hamster_care_tab">
+        The Care tab allows automatic as well as manual topping-up of food and water.
+    </string>
+
+    <string name="fish_care_tab">
+        The Care tab allows automatic as well as manual topping-up of food and water.
+        \n\nIt also shows the cleanliness of the water in the fish tank, notifying the user when
+        it is time to change the water.
+    </string>
+
+    <string name="plant_care_tab">
+        The Care tab allows automatic as well as manual topping-up of water.
     </string>
 
     <string name="hamster_activate_auto_top_up">
         Automatic top-up of food and water can be enabled or disabled by simply
         toggling the switch-button on or off.
         \n\nAutomatic top-up will occur when the food/water level is low.
+    </string>
+
+    <string name="plant_activate_auto_top_up">
+        Automatic top-up of water can be enabled or disabled by simply
+        toggling the switch-button on or off.
+        \n\nAutomatic top-up will occur when the water level is low.
     </string>
 
     <string name="hamster_food_card">
@@ -40,15 +76,58 @@
         of food. The top-up does not take place if the food amount is full.
     </string>
 
+    <string name="fish_food_card">
+        The food card displays information about the amount of food left and the previous top-up
+        of food.
+        \n\nThe \"TOP-UP FOOD!\" button at the top right corner also allows manual topping-up
+        of food. The top-up does not take place if the fish is/are just fed recently.
+    </string>
+
     <string name="hamster_water_card">
         The water card displays information about the amount of water left and the previous top-up
         of water.
         \n\nThe \"TOP-UP WATER!\" button at the top right corner also allows manual topping-up
-        of water. The top-up does not take place if the food amount is full.
+        of water. The top-up does not take place if the water amount is full.
+    </string>
+
+    <string name="fish_water_card">
+        The water card displays information about the amount of water left and the previous top-up
+        of water.
+        \n\nThe \"TOP-UP WATER!\" button at the top right corner also allows manual topping-up
+        of water. The top-up does not take place if the water amount is sufficient.
+    </string>
+
+    <string name="plant_water_card">
+        The water card displays information about the moisture level of the soil and the
+        previous top-up of water.
+        \n\nThe \"TOP-UP WATER!\" button at the top right corner also allows manual topping-up
+        of water. The top-up does not take place if the soil is still sufficiently moist.
+    </string>
+
+    <string name="fish_cleanliness_card">
+        The cleanliness card displays information about the cleanliness of water in the fish tank.
+        \n\nUnfortunately, there is no automatic or manual cleaning of water through the app (at
+        the moment) and the user is required to manually replace the water himself/herself.
     </string>
 
     <string name="hamster_photo_tab">
         The Photo tab allows you to take a picture of your hamster at any point of time to
+        see how it is doing.
+        \n\nSimply do so through the round button with a camera icon.
+        \n\nUnstable internet connection may cause the photo to take a longer time to load.
+        If you see the loading progress circle, please be patient.
+    </string>
+
+    <string name="fish_photo_tab">
+        The Photo tab allows you to take a picture of your fish at any point of time to
+        see how it is doing.
+        \n\nSimply do so through the round button with a camera icon.
+        \n\nUnstable internet connection may cause the photo to take a longer time to load.
+        If you see the loading progress circle, please be patient.
+    </string>
+
+    <string name="plant_photo_tab">
+        The Photo tab allows you to take a picture of your plant at any point of time to
         see how it is doing.
         \n\nSimply do so through the round button with a camera icon.
         \n\nUnstable internet connection may cause the photo to take a longer time to load.
@@ -61,8 +140,32 @@
         both name and profile picture.
     </string>
 
+    <string name="fish_settings_tab">
+        The Settings tab allows you to set your fishes\' name and/or profile picture here.
+        \n\nClick the green round button with a tick to confirm changes for
+        both name and profile picture.
+    </string>
+
+    <string name="plant_settings_tab">
+        The Settings tab allows you to set your plant\'s name and/or profile picture here.
+        \n\nClick the green round button with a tick to confirm changes for
+        both name and profile picture.
+    </string>
+
     <string name="hamster_edit_name">
         Key in the name that you wish to set your hamster\'s name to.
+        \n\nDon\'t forget to click on the green round button with a tick icon at the bottom
+        to save your changes!
+    </string>
+
+    <string name="fish_edit_name">
+        Key in the name that you wish to set your fishes\' name to.
+        \n\nDon\'t forget to click on the green round button with a tick icon at the bottom
+        to save your changes!
+    </string>
+
+    <string name="plant_edit_name">
+        Key in the name that you wish to set your plant\'s name to.
         \n\nDon\'t forget to click on the green round button with a tick icon at the bottom
         to save your changes!
     </string>
@@ -76,12 +179,48 @@
         to save your changes!
     </string>
 
+    <string name="fish_profile_picture">
+        A preview of your fishes\' profile picture is displayed here.
+        \n\nClick on the blue round button with an arrow icon to choose an image.
+        \n\nOnce you\'ve chosen an image, your fishes\' tentative profile picture will be
+        displayed here.
+        \n\nDon\'t forget to click on the green round button with a tick icon at the bottom
+        to save your changes!
+    </string>
+
+    <string name="plant_profile_picture">
+        A preview of your plant\'s profile picture is displayed here.
+        \n\nClick on the blue round button with an arrow icon to choose an image.
+        \n\nOnce you\'ve chosen an image, your hamster\'s tentative profile picture will be
+        displayed here.
+        \n\nDon\'t forget to click on the green round button with a tick icon at the bottom
+        to save your changes!
+    </string>
+
     <string name="hamster_popup_options">
         You can choose 4 ways to upload an image:
         \n\t1. Use our default hamster profile picture
         \n\t2. Upload an image from your phone gallery
         \n\t3. Take a photo with your phone camera
         \n\t4. Use the latest HamsterCare photo taken in the
+        \n\t\t\tPhoto Tab
+    </string>
+
+    <string name="fish_popup_options">
+        You can choose 4 ways to upload an image:
+        \n\t1. Use our default fish profile picture
+        \n\t2. Upload an image from your phone gallery
+        \n\t3. Take a photo with your phone camera
+        \n\t4. Use the latest FishCare photo taken in the
+        \n\t\t\tPhoto Tab
+    </string>
+
+    <string name="plant_popup_options">
+        You can choose 4 ways to upload an image:
+        \n\t1. Use our default plant profile picture
+        \n\t2. Upload an image from your phone gallery
+        \n\t3. Take a photo with your phone camera
+        \n\t4. Use the latest PlantCare photo taken in the
         \n\t\t\tPhoto Tab
     </string>
 

@@ -173,7 +173,7 @@ public class PlantMainFragment extends Fragment {
         topUpWaterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (waterIsLow.equals("true")) {
+                if (waterIsLow.equals("false")) {
                     Toast.makeText(getActivity(), "Already watered recently!", Toast.LENGTH_LONG).show();
                 } else {
                     topUpWater.setValue("true");

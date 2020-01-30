@@ -125,7 +125,7 @@ public class PlantSettingsFragment extends Fragment {
             public void onClick(View view) {
                 String[] choices = {"Default Picture",
                         "Choose from Gallery",
-                        "Take a Photo", "Latest FishCare Photo"};
+                        "Take a Photo", "Latest PlantCare Photo"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Upload Image");
                 builder.setItems(choices, new DialogInterface.OnClickListener() {
@@ -134,8 +134,8 @@ public class PlantSettingsFragment extends Fragment {
                         // the user clicked on colors[which]
                         if (which == 0) {
                             // Select default image
-                            plantDpSettings.setImageResource(R.drawable.ic_clown_fish_svgrepo_com);
-                            newImageBitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_clown_fish_svgrepo_com));
+                            plantDpSettings.setImageResource(R.drawable.ic_plant_svgrepo_com);
+                            newImageBitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_plant_svgrepo_com));
                         } else if (which == 1) {
                             // Select image from gallery
                             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -151,7 +151,7 @@ public class PlantSettingsFragment extends Fragment {
                             // Ensure that a photo exists in FishCare
                             if (url == null || url.equals("")) {
                                 Toast.makeText(getContext(),
-                                        "FishCare photo does not exist",
+                                        "PlantCare photo does not exist",
                                         Toast.LENGTH_LONG).show();
                             } else {
                                 // Choose latest photo of plant

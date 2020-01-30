@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -148,6 +149,8 @@ public class HamsterPhotoFragment extends Fragment {
                                 return false;
                             }
                         })
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
                         .into(hamsterPhoto);
             }
         }

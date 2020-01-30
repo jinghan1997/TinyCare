@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#42678F</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#1469C4</color>
+
+    <color name="colorHamsterMainCard">#a32e4d</color>
+    <color name="colorFishMainCard">#2e6ea3</color>
+    <color name="colorPlantMainCard">#a3932e</color>
+
+    <color name="colorHamsterMidHeader">#B36729</color>
+    <color name="colorHamsterMidCard">#FFDABB</color>
+    <color name="colorHamsterMidButton">#C98724</color>
 
     <color name="colorDefaultCard">#979797</color>
     <color name="colorDefaultHeader">#696969</color>

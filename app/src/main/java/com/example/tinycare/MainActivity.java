@@ -3,7 +3,6 @@ package com.example.tinycare;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +15,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                             //path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
                         } else {
                             name = "hamster";
-                            bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_svgrepo_com));
+                            bitmap = Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_hamster_icon));
                             path = Utils.encodeTobase64(bitmap);
                             //path = Utils.saveToInternalStorage(bitmap, name, MainActivity.this);
                         }
